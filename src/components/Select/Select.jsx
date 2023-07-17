@@ -18,7 +18,6 @@ function Select({ onGetChangeSelect, ...rest }) {
   const [country, setCountry] = useState('UA');
 
   const onChange = ({ target }) => {
-    console.log(target.value);
     const result = target.value || undefined;
     onGetChangeSelect(result);
     setCountry(target.value);

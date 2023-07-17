@@ -6,15 +6,23 @@ import {
 } from './Phonebook.styled';
 import PropTypes from 'prop-types';
 import 'yup-phone-lite';
-import { nanoid } from 'nanoid';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Controller, useForm } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors.';
+import { addContact } from 'redux/contactsSlice';
 
-function Phonebook({ getContacts }) {
+function Phonebook() {
   const [dialCode, setDialCode] = useState('');
   const [numberValue, setNumberValue] = useState('');
+
+  const dispatch = useDispatch();
+
+  const contacts = useSelector(getContacts);
 
   const {
     register,
@@ -30,11 +38,48 @@ function Phonebook({ getContacts }) {
     },
   });
 
+  const isEmpty = userData => {
+    let isResetForm = true;
+
+    const isEmptyName = contacts.filter(
+      ({ name }) => name.toLowerCase() === userData.name.toLowerCase()
+    ).length;
+
+    const isEmptyNumber = contacts.filter(
+      ({ number }) => number === userData.number
+    ).length;
+
+    if (!isEmptyName && !isEmptyNumber) {
+      toast.success(`${userData.name}, success add!`, {
+        hideProgressBar: true,
+        autoClose: 2000,
+        theme: 'dark',
+      });
+
+      dispatch(addContact(userData));
+    }
+
+    if (isEmptyName || isEmptyNumber) {
+      toast.warn(
+        `${
+          (isEmptyName && userData.name) || (isEmptyNumber && userData.number)
+        }, already exist in phonebook!!!`,
+        {
+          hideProgressBar: true,
+          autoClose: 2000,
+          theme: 'dark',
+        }
+      );
+      isResetForm = false;
+    }
+
+    return isResetForm;
+  };
+
   const onSubmit = async ({ name, number }) => {
-    const isResetForm = getContacts({
+    const isResetForm = isEmpty({
       name,
       number,
-      id: nanoid(),
     });
 
     setFocus('name');
@@ -93,8 +138,8 @@ function Phonebook({ getContacts }) {
   );
 }
 
-Phonebook.propTypes = {
-  getContacts: PropTypes.func.isRequired,
-};
+// Phonebook.propTypes = {
+//   getContacts: PropTypes.func.isRequired,
+// };
 
 export default Phonebook;

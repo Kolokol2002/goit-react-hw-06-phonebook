@@ -1,7 +1,15 @@
 import { ContainerFilter, TitleFilter, InputFilter } from './Filter.styled';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { setValueFilter } from 'redux/filterSlice';
 
-const Filter = ({ handleFilter }) => {
+const Filter = () => {
+  const dispatch = useDispatch();
+
+  const handleFilter = ({ target: { value } }) => {
+    dispatch(setValueFilter(value));
+  };
+
   return (
     <ContainerFilter>
       <TitleFilter>Find number</TitleFilter>
@@ -10,8 +18,8 @@ const Filter = ({ handleFilter }) => {
   );
 };
 
-Filter.propTypes = {
-  handleFilter: PropTypes.func.isRequired,
-};
+// Filter.propTypes = {
+//   handleFilter: PropTypes.func.isRequired,
+// };
 
 export default Filter;
