@@ -14,7 +14,6 @@ const Contacts = () => {
   const filter = useSelector(getValueFilter);
 
   const filterChange = () => {
-    console.log(contacts);
     return contacts.filter(
       item =>
         item.name.toLowerCase().includes(filter.toLowerCase()) ||
@@ -49,16 +48,5 @@ const Contacts = () => {
     </ContactsUserList>
   );
 };
-
-// Contacts.propTypes = {
-//   usersArray: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//       id: PropTypes.string.isRequired,
-//     })
-//   ),
-//   onDelete: PropTypes.func.isRequired,
-// };
 
 export default Contacts;
