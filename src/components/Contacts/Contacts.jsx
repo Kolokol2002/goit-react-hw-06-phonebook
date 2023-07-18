@@ -5,9 +5,7 @@ import {
   ContactsUserName,
   ContactsButtonDelite,
 } from './Contacts.styled';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { deleteContact } from 'redux/contactsSlice';
 
 const Contacts = () => {
@@ -15,15 +13,12 @@ const Contacts = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getValueFilter);
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
-
   const filterChange = () => {
+    console.log(contacts);
     return contacts.filter(
       item =>
         item.name.toLowerCase().includes(filter.toLowerCase()) ||
-        item.number.toLowerCase().includes(filter.toLowerCase())
+        item.number.includes(filter)
     );
   };
 

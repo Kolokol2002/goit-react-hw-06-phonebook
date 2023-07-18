@@ -1,4 +1,4 @@
-import Phonebook from '../Phonebook';
+import Phonebook from '../Form';
 import Contacts from '../Contacts';
 import Title from '../Title';
 import Filter from '../Filter';

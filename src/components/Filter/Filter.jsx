@@ -1,5 +1,4 @@
 import { ContainerFilter, TitleFilter, InputFilter } from './Filter.styled';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { setValueFilter } from 'redux/filterSlice';
 
@@ -17,9 +16,5 @@ const Filter = () => {
     </ContainerFilter>
   );
 };
-
-// Filter.propTypes = {
-//   handleFilter: PropTypes.func.isRequired,
-// };
 
 export default Filter;

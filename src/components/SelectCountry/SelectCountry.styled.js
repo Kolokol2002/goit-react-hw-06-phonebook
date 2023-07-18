@@ -4,7 +4,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import 'react-phone-number-input/style.css';
 // import Input from 'react-phone-number-input/input';
 
-export const SelectCountry = styled.select`
+export const SelectCountries = styled.select`
   width: 20px;
   border: 0;
   opacity: 0;

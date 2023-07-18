@@ -10,11 +10,11 @@ import {
   ContainerSelectCountry,
   FlagCountry,
   OptionCountry,
-  SelectCountry,
-} from './Select.styled';
+  SelectCountries,
+} from './SelectCountry.styled';
 import { useState } from 'react';
 
-function Select({ onGetChangeSelect, ...rest }) {
+const SelectCountry = ({ onGetChangeSelect, ...rest }) => {
   const [country, setCountry] = useState('UA');
 
   const onChange = ({ target }) => {
@@ -31,22 +31,22 @@ function Select({ onGetChangeSelect, ...rest }) {
         />
       )}
       <ContainerOptionsCountry>
-        <SelectCountry {...rest} onChange={onChange}>
+        <SelectCountries {...rest} onChange={onChange}>
           {getCountries().map(country => (
             <OptionCountry key={country} value={country}>
               {en[country]} +{getCountryCallingCode(country)}
             </OptionCountry>
           ))}
-        </SelectCountry>
+        </SelectCountries>
 
         <ArrowSelectCountry />
       </ContainerOptionsCountry>
     </ContainerSelectCountry>
   );
-}
+};
 
-Select.propTypes = {
+SelectCountry.propTypes = {
   onGetChangeSelect: PropTypes.func.isRequired,
 };
 
-export default Select;
+export default SelectCountry;

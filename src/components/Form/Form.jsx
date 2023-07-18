@@ -3,8 +3,7 @@ import {
   ButtonPhone,
   NameInput,
   ErrorValidate,
-} from './Phonebook.styled';
-import PropTypes from 'prop-types';
+} from './Form.styled';
 import 'yup-phone-lite';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors.';
 import { addContact } from 'redux/contactsSlice';
 
-function Phonebook() {
+function Form() {
   const [dialCode, setDialCode] = useState('');
   const [numberValue, setNumberValue] = useState('');
 
@@ -138,8 +137,4 @@ function Phonebook() {
   );
 }
 
-// Phonebook.propTypes = {
-//   getContacts: PropTypes.func.isRequired,
-// };
-
-export default Phonebook;
+export default Form;
